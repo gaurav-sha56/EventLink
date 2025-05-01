@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% if request.user.is_anonymous %}
+<!-- Hero Section -->
+<section class="text-center py-20 px-4">
+    <h1 class="text-4xl font-bold mb-4">Manage and Promote<br>Your Event</h1>
+    <p class="text-gray-600 max-w-xl mx-auto mb-6">Streamline your event management and promotion with our comprehensive platform.</p>
+    <a href={% url "student_login" %} class="px-6 py-3 bg-blue-600 text-white rounded-md text-lg">Get Started</a>
+  </section>
+
+  <!-- Feature Cards -->
+  <section class="grid grid-cols-1 sm:grid-cols-3 gap-6 px-8 py-10">
+    <div class="border rounded-xl p-6 text-center shadow-sm">
+      <img src="https://img.icons8.com/ios-filled/50/calendar--v1.png" class="mx-auto mb-4 w-8 h-8" alt="dashboard"/>
+      <h3 class="font-semibold text-lg mb-2">Event Dashboard</h3>
+      <p class="text-gray-600 text-sm">View and manage all your events in one place with our intuitive dashboard.</p>
+    </div>
+    <div class="border rounded-xl p-6 text-center shadow-sm">
+      <img src="https://img.icons8.com/ios-filled/50/conference-call.png" class="mx-auto mb-4 w-8 h-8" alt="teams"/>
+      <h3 class="font-semibold text-lg mb-2">Registered Teams</h3>
+      <p class="text-gray-600 text-sm">Check out the teams that have registered for your event and send join requests.</p>
+    </div>
+    <div class="border rounded-xl p-6 text-center shadow-sm">
+      <img src="https://img.icons8.com/ios-filled/50/add-user-group-man-man--v1.png" class="mx-auto mb-4 w-8 h-8" alt="requests"/>
+      <h3 class="font-semibold text-lg mb-2">Join Requests</h3>
+      <p class="text-gray-600 text-sm">Review and manage students who want to join a team.</p>
+    </div>
+  </section>
+
+  <!-- University Logos -->
+  <section class="flex justify-center gap-12 py-10 px-6 flex-wrap">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Indiana_Hoosiers_logo.svg/1024px-Indiana_Hoosiers_logo.svg.png" class="h-10" alt="IU"/>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Notre_Dame_Fighting_Irish_logo.svg/1024px-Notre_Dame_Fighting_Irish_logo.svg.png" class="h-10" alt="ND"/>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Butler_Bulldogs_logo.svg/1024px-Butler_Bulldogs_logo.svg.png" class="h-10" alt="Butler"/>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Purdue_Boilermakers_logo.svg/1024px-Purdue_Boilermakers_logo.svg.png" class="h-10" alt="Purdue"/>
+  </section>
+
+{% else %}
+
+<div class="min-h-screen bg-gray-100 p-6">
+    <div class="max-w-5xl mx-auto">
+        <h1 class="text-3xl font-bold mb-4 text-gray-800">Welcome, {{ user.first_name }} 👋</h1>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Profile Card -->
+            <div class="bg-white shadow rounded-2xl p-6">
+                <h2 class="text-xl font-semibold mb-2">Your Profile</h2>
+                <p class="text-sm text-gray-600 mb-4">Complete your profile to get team suggestions.</p>
+                <a href="{% url 'profile' %}" class="text-blue-500 hover:underline text-sm">View / Edit Profile</a>
+            </div>
+
+            <!-- Upcoming Events -->
+            <div class="bg-white shadow rounded-2xl p-6">
+                <h2 class="text-xl font-semibold mb-2">Upcoming Events</h2>
+                <ul class="text-sm text-gray-700 space-y-2">
+                    {% if upcoming_events %}
+                    {% for event in upcoming_events %}
+                        <li>{{ event.name }} - <span class="text-gray-500">{{ event.date }}</span></li>
+                    {% empty %}
+                        <li class="text-gray-500">No events coming up.</li>
+                    {% endfor %}
+                    {% endif %}
+                </ul>
+                <a href="{% url 'events' %}" class="text-blue-500 hover:underline text-sm mt-2 block">View All Events</a>
+            </div>
+
+            <!-- Your Teams -->
+            <div class="bg-white shadow rounded-2xl p-6">
+                <h2 class="text-xl font-semibold mb-2">Your Teams</h2>
+                <ul class="text-sm text-gray-700 space-y-2">
+                    {% if user_teams %}
+                    {% for team in user_teams %}
+                        <li>{{ team.name }} - <span class="text-gray-500">{{ team.event.name }}</span></li>
+                    {% empty %}
+                        <li class="text-gray-500">You are not in any team yet.</li>
+                    {% endfor %}
+                    {% endif %}
+                </ul>
+                <a href="{% url 'teams' %}" class="text-blue-500 hover:underline text-sm mt-2 block">Manage Teams</a>
+            </div>
+        </div>
+
+        <!-- Bottom Actions -->
+        <div class="mt-10 flex flex-col md:flex-row gap-4">
+            <a href="{% url 'find_teammates' %}" class="bg-blue-600 text-white rounded-xl px-6 py-3 text-center w-full md:w-auto hover:bg-blue-700 transition">
+                🔍 Find Teammates
+            </a>
+            <a href="{% url 'create_team' %}" class="bg-green-600 text-white rounded-xl px-6 py-3 text-center w-full md:w-auto hover:bg-green-700 transition">
+                ➕ Create a Team
+            </a>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

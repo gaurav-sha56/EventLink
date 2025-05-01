@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="max-w-6xl mx-auto p-6">
+    <h1 class="text-3xl font-bold mb-6">Dashboard</h1>
+  
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- Upcoming Events -->
+      <div>
+        <h2 class="text-xl font-semibold mb-3">Upcoming Events</h2>
+        <div class="bg-white border rounded-lg p-4 space-y-4">
+          <!-- Event Card -->
+          <div>
+            <p class="font-semibold">Hackathon</p>
+            <p class="text-sm text-gray-600">December 5, 2024</p>
+            <p class="text-sm text-gray-600">Symposium Hall</p>
+          </div>
+          <div>
+            <p class="font-semibold">Esports Tournament</p>
+            <p class="text-sm text-gray-600">January 15, 2025</p>
+            <p class="text-sm text-gray-600">Student Center</p>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Team Requests -->
+      <div>
+        <h2 class="text-xl font-semibold mb-3">Team Requests</h2>
+        <div class="bg-white border rounded-lg p-4 space-y-4">
+          <!-- Team Request -->
+          <div class="flex justify-between items-center">
+            <div>
+              <p class="font-semibold">Byte Warriors</p>
+              <p class="text-sm text-gray-600">Hackathon</p>
+            </div>
+            <div class="space-x-2">
+              <button class="px-3 py-1 text-sm bg-blue-100 text-blue-700 rounded">Accept</button>
+              <button class="px-3 py-1 text-sm bg-gray-100 text-gray-700 rounded">Decline</button>
+            </div>
+          </div>
+          <div class="flex justify-between items-center">
+            <div>
+              <p class="font-semibold">Frag Masters</p>
+              <p class="text-sm text-gray-600">Esports Tournament</p>
+            </div>
+            <div class="space-x-2">
+              <button class="px-3 py-1 text-sm bg-blue-100 text-blue-700 rounded">Accept</button>
+              <button class="px-3 py-1 text-sm bg-gray-100 text-gray-700 rounded">Decline</button>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Sent Join Requests (Left Column) -->
+      <div>
+        <h2 class="text-xl font-semibold mt-6 mb-3">Sent Join Requests</h2>
+        <div class="bg-white border rounded-lg p-4 space-y-4">
+          <div class="flex justify-between items-center">
+            <div>
+              <p class="font-semibold">Hackathon</p>
+              <p class="text-sm text-gray-600">Byte Warriors</p>
+            </div>
+            <span class="text-sm text-yellow-500">Pending</span>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Sent Join Requests (Right Column) -->
+      <div>
+        <h2 class="text-xl font-semibold mt-6 mb-3 invisible md:visible">Sent Join Requests</h2>
+        <div class="bg-white border rounded-lg p-4 space-y-4">
+          <div class="flex justify-between items-center">
+            <div>
+              <p class="font-semibold">Hackathon</p>
+              <p class="text-sm text-gray-600">Byte Warriors</p>
+            </div>
+            <button class="px-3 py-1 text-sm bg-red-100 text-red-700 rounded">Cancel Request</button>
+          </div>
+          <div class="flex justify-between items-center">
+            <div>
+              <p class="font-semibold">Esports Tournament</p>
+              <p class="text-sm text-gray-600">GameChangers</p>
+            </div>
+            <span class="text-sm text-green-600">Accepted</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+{% endblock %}

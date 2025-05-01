@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="min-h-screen flex items-center justify-center bg-gray-100">
+  <div class="bg-white p-8 rounded-2xl shadow-md w-full max-w-4xl">
+    <h1 class="text-3xl font-bold mb-4 text-center">Complete Your Profile</h1>
+    <p class="text-gray-500 text-center mb-8">Help us get to know you better</p>
+
+    <form method="post" enctype="multipart/form-data" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {% csrf_token %}
+
+      <!-- Left -->
+      <div class="space-y-4">
+        <div>
+          <label class="block text-sm font-semibold mb-1">Full Name</label>
+          {{ form.full_name|add_class:"w-full p-2 border rounded-lg" }}
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm font-semibold mb-1">Class</label>
+            {{ form.class_name|add_class:"w-full p-2 border rounded-lg" }}
+          </div>
+          <div>
+            <label class="block text-sm font-semibold mb-1">Section</label>
+            {{ form.section|add_class:"w-full p-2 border rounded-lg" }}
+          </div>
+        </div>
+        <div>
+          <label class="block text-sm font-semibold mb-1">Net Number</label>
+          {{ form.net_number|add_class:"w-full p-2 border rounded-lg" }}
+        </div>
+        <div>
+          <label class="block text-sm font-semibold mb-1">About You</label>
+          {{ form.about_you|add_class:"w-full p-2 border rounded-lg" }}
+        </div>
+      </div>
+
+      <!-- Right -->
+      <div class="space-y-6">
+        <div class="flex flex-col items-center">
+          <label class="block text-sm font-semibold mb-2">Profile Picture</label>
+          {{ form.profile_picture }}
+        </div>
+        <div>
+          <label class="block text-sm font-semibold mb-2">About Virtues</label>
+          <div class="flex flex-col gap-2">
+            {% for cb in form.virtues %}
+              <label class="flex items-center space-x-2">
+                {{ cb.tag }}
+                <span>{{ cb.choice_label }}</span>
+              </label>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="col-span-2 flex justify-between mt-8">
+        <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded-lg">
+          Save Profile
+        </button>
+        <a href="{% url 'dashboard' %}" class="text-gray-500 hover:text-blue-600 font-semibold">
+          Skip for now
+        </a>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
