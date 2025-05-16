@@ -1,9 +1,8 @@
 from django.shortcuts import render, redirect, HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
-
 from .forms import ProfileForm
-# Create your views here.
+from django.contrib import messages
 
 
 def index(request):
@@ -12,8 +11,7 @@ def index(request):
     return render(request, "home.html")
 
 
-      
-
+    
 def register(request):
     return render(request, "register.html")
 
@@ -58,21 +56,26 @@ def college_register(request):
 
 
 def student_register(request):
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        email = request.POST.get('email')
-        password1 = request.POST.get('password1')
-        password2 = request.POST.get('password2')
+    try:
+        if request.method == 'POST':
+            username = request.POST.get("username")
+            email = request.POST.get("email")
+            password1 = request.POST.get("password1")
+            password2 = request.POST.get("password2")
 
-        if password2!=password2:
-            message = "Please check both password"
-        else:
-            message = "User created successfully"
-            user = User.objects.create_user(username, email, password1)
-            login(request, user)
-            print(username)
-            return redirect('/')
-        return render(request, "student_register.html", {"messages":message})
+            if password2!=password2:
+                message = "Please check both password"
+            else:
+                message = "User created successfully"
+                user = User.objects.create_user(username, email, password1)
+                login(request, user)
+                print(username, password1, password2)
+
+                return redirect('/')
+            return render(request, "student_register.html", {"messages":message})
+    except Exception:
+        return render(request, "student_register.html")
+
     return render(request, "student_register.html")
 
 
