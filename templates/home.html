@@ -29,68 +29,193 @@
   </section>
 
   <!-- University Logos -->
-  <section class="flex justify-center gap-12 py-10 px-6 flex-wrap">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Indiana_Hoosiers_logo.svg/1024px-Indiana_Hoosiers_logo.svg.png" class="h-10" alt="IU"/>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Notre_Dame_Fighting_Irish_logo.svg/1024px-Notre_Dame_Fighting_Irish_logo.svg.png" class="h-10" alt="ND"/>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Butler_Bulldogs_logo.svg/1024px-Butler_Bulldogs_logo.svg.png" class="h-10" alt="Butler"/>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Purdue_Boilermakers_logo.svg/1024px-Purdue_Boilermakers_logo.svg.png" class="h-10" alt="Purdue"/>
-  </section>
+  
 
 {% else %}
 
-<div class="min-h-screen bg-gray-100 p-6">
-    <div class="max-w-5xl mx-auto">
-        <h1 class="text-3xl font-bold mb-4 text-gray-800">Welcome, {{ user.first_name }} 👋</h1>
-        
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <!-- Profile Card -->
-            <div class="bg-white shadow rounded-2xl p-6">
-                <h2 class="text-xl font-semibold mb-2">Your Profile</h2>
-                <p class="text-sm text-gray-600 mb-4">Complete your profile to get team suggestions.</p>
-                <a href="{% url 'profile' %}" class="text-blue-500 hover:underline text-sm">View / Edit Profile</a>
-            </div>
-
-            <!-- Upcoming Events -->
-            <div class="bg-white shadow rounded-2xl p-6">
-                <h2 class="text-xl font-semibold mb-2">Upcoming Events</h2>
-                <ul class="text-sm text-gray-700 space-y-2">
-                    {% if upcoming_events %}
-                    {% for event in upcoming_events %}
-                        <li>{{ event.name }} - <span class="text-gray-500">{{ event.date }}</span></li>
-                    {% empty %}
-                        <li class="text-gray-500">No events coming up.</li>
-                    {% endfor %}
-                    {% endif %}
-                </ul>
-                <a href="{% url 'events' %}" class="text-blue-500 hover:underline text-sm mt-2 block">View All Events</a>
-            </div>
-
-            <!-- Your Teams -->
-            <div class="bg-white shadow rounded-2xl p-6">
-                <h2 class="text-xl font-semibold mb-2">Your Teams</h2>
-                <ul class="text-sm text-gray-700 space-y-2">
-                    {% if user_teams %}
-                    {% for team in user_teams %}
-                        <li>{{ team.name }} - <span class="text-gray-500">{{ team.event.name }}</span></li>
-                    {% empty %}
-                        <li class="text-gray-500">You are not in any team yet.</li>
-                    {% endfor %}
-                    {% endif %}
-                </ul>
-                <a href="{% url 'teams' %}" class="text-blue-500 hover:underline text-sm mt-2 block">Manage Teams</a>
-            </div>
-        </div>
-
-        <!-- Bottom Actions -->
-        <div class="mt-10 flex flex-col md:flex-row gap-4">
-            <a href="{% url 'find_teammates' %}" class="bg-blue-600 text-white rounded-xl px-6 py-3 text-center w-full md:w-auto hover:bg-blue-700 transition">
-                🔍 Find Teammates
-            </a>
-            <a href="{% url 'create_team' %}" class="bg-green-600 text-white rounded-xl px-6 py-3 text-center w-full md:w-auto hover:bg-green-700 transition">
-                ➕ Create a Team
-            </a>
-        </div>
+   <!-- Search Bar -->
+   <div class="p-10">
+    <!-- Search and Tags -->
+    <div class="mb-6">
+      <input type="text" placeholder="Search events..." class="px-4 py-2 w-full max-w-sm border border-gray-300 rounded-md" />
     </div>
-</div>
+
+    <div class="flex flex-wrap gap-3 mb-8">
+      <button class="px-4 py-2 border border-gray-300 rounded-full bg-blue-600 text-white">All</button>
+      <button class="px-4 py-2 border border-gray-300 rounded-full bg-white hover:bg-gray-100">Technology</button>
+      <button class="px-4 py-2 border border-gray-300 rounded-full bg-white hover:bg-gray-100">Culture</button>
+      <button class="px-4 py-2 border border-gray-300 rounded-full bg-white hover:bg-gray-100">Startup</button>
+      <button class="px-4 py-2 border border-gray-300 rounded-full bg-white hover:bg-gray-100">Design</button>
+      <button class="px-4 py-2 border border-gray-300 rounded-full bg-white hover:bg-gray-100">Hackathon</button>
+    </div>
+
+    <!-- Event Cards -->
+    <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+      <!-- Card 1 -->
+      <div class="bg-white p-6 rounded-xl shadow">
+        <h2 class="text-lg font-semibold">CodeMaster Challenge</h2>
+        <p class="text-sm text-gray-500">IIT Bombay</p>
+        <p class="mt-2 text-sm">A 48-hour coding marathon featuring real-world problems.</p>
+        <div class="mt-3 flex flex-wrap gap-2">
+          <span class="text-xs bg-blue-100 text-blue-600 px-3 py-1 rounded-full">Coding</span>
+          <span class="text-xs bg-green-100 text-green-600 px-3 py-1 rounded-full">Hackathon</span>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="bg-white p-6 rounded-xl shadow">
+        <h2 class="text-lg font-semibold">DesignSphere 2025</h2>
+        <p class="text-sm text-gray-500">NID Ahmedabad</p>
+        <p class="mt-2 text-sm">Creative jam session focusing on UX/UI innovation.</p>
+        <div class="mt-3 flex flex-wrap gap-2">
+          <span class="text-xs bg-pink-100 text-pink-600 px-3 py-1 rounded-full">Design</span>
+          <span class="text-xs bg-blue-100 text-blue-600 px-3 py-1 rounded-full">Creativity</span>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="bg-white p-6 rounded-xl shadow">
+        <h2 class="text-lg font-semibold">WebCraft Workshop</h2>
+        <p class="text-sm text-gray-500">IIIT Bangalore</p>
+        <p class="mt-2 text-sm">Masterclass in web technologies: React, Tailwind, and more.</p>
+        <div class="mt-3 flex flex-wrap gap-2">
+          <span class="text-xs bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full">Web Development</span>
+          <span class="text-xs bg-blue-100 text-blue-600 px-3 py-1 rounded-full">Frontend</span>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="bg-white p-6 rounded-xl shadow">
+        <h2 class="text-lg font-semibold">Startup Grind Fest</h2>
+        <p class="text-sm text-gray-500">BITS Goa</p>
+        <p class="mt-2 text-sm">Pitch, network, and grow your startup with mentors.</p>
+        <div class="mt-3 flex flex-wrap gap-2">
+          <span class="text-xs bg-red-100 text-red-600 px-3 py-1 rounded-full">Startup</span>
+          <span class="text-xs bg-purple-100 text-purple-600 px-3 py-1 rounded-full">Business</span>
+        </div>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="bg-white p-6 rounded-xl shadow">
+        <h2 class="text-lg font-semibold">HackHub</h2>
+        <p class="text-sm text-gray-500">VIT Vellore</p>
+        <p class="mt-2 text-sm">A national-level hackathon on AI and sustainability.</p>
+        <div class="mt-3 flex flex-wrap gap-2">
+          <span class="text-xs bg-green-100 text-green-700 px-3 py-1 rounded-full">Hackathon</span>
+          <span class="text-xs bg-gray-100 text-gray-700 px-3 py-1 rounded-full">AI</span>
+        </div>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="bg-white p-6 rounded-xl shadow">
+        <h2 class="text-lg font-semibold">Innovate '25</h2>
+        <p class="text-sm text-gray-500">SRM University</p>
+        <p class="mt-2 text-sm">Showcasing student inventions and future tech demos.</p>
+        <div class="mt-3 flex flex-wrap gap-2">
+          <span class="text-xs bg-indigo-100 text-indigo-600 px-3 py-1 rounded-full">Innovation</span>
+          <span class="text-xs bg-blue-100 text-blue-600 px-3 py-1 rounded-full">Technology</span>
+        </div>
+      </div>
+
+      <!-- Card 7 -->
+      <div class="bg-white p-6 rounded-xl shadow">
+        <h2 class="text-lg font-semibold">Creative Culture Carnival</h2>
+        <p class="text-sm text-gray-500">JNU Delhi</p>
+        <p class="mt-2 text-sm">An artistic celebration of global cultures and traditions.</p>
+        <div class="mt-3 flex flex-wrap gap-2">
+          <span class="text-xs bg-orange-100 text-orange-600 px-3 py-1 rounded-full">Culture</span>
+          <span class="text-xs bg-purple-100 text-purple-600 px-3 py-1 rounded-full">Art</span>
+        </div>
+      </div>
+
+      <!-- Card 8 -->
+      <div class="bg-white p-6 rounded-xl shadow">
+        <h2 class="text-lg font-semibold">NextGen Developers Meet</h2>
+        <p class="text-sm text-gray-500">IIT Kharagpur</p>
+        <p class="mt-2 text-sm">Meet, collaborate and build apps for social impact.</p>
+        <div class="mt-3 flex flex-wrap gap-2">
+          <span class="text-xs bg-blue-100 text-blue-600 px-3 py-1 rounded-full">Development</span>
+          <span class="text-xs bg-green-100 text-green-600 px-3 py-1 rounded-full">Social Impact</span>
+        </div>
+      </div>
+
+      <!-- Card 9 -->
+      <div class="bg-white p-6 rounded-xl shadow">
+        <h2 class="text-lg font-semibold">Pixel Playoff</h2>
+        <p class="text-sm text-gray-500">MIT Institute of Design</p>
+        <p class="mt-2 text-sm">Digital design contest focused on gamification UX.</p>
+        <div class="mt-3 flex flex-wrap gap-2">
+          <span class="text-xs bg-pink-100 text-pink-600 px-3 py-1 rounded-full">Design</span>
+          <span class="text-xs bg-yellow-100 text-yellow-600 px-3 py-1 rounded-full">Games</span>
+        </div>
+      </div>
+
+      <!-- Card 10 -->
+      <div class="bg-white p-6 rounded-xl shadow">
+        <h2 class="text-lg font-semibold">AI in Healthcare</h2>
+        <p class="text-sm text-gray-500">AIIMS Delhi</p>
+        <p class="mt-2 text-sm">Exploring the future of medicine powered by artificial intelligence.</p>
+        <div class="mt-3 flex flex-wrap gap-2">
+          <span class="text-xs bg-red-100 text-red-600 px-3 py-1 rounded-full">AI</span>
+          <span class="text-xs bg-blue-100 text-blue-600 px-3 py-1 rounded-full">Healthcare</span>
+        </div>
+      </div>
+    </div>
+  </div>
 {% endif %}
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const events = document.querySelectorAll('.grid > div'); // all event cards
+    const searchInput = document.querySelector('input[type="text"]'); // search input
+    const filterButtons = document.querySelectorAll('.flex.flex-wrap button'); // all filter buttons
+    
+    let activeCategory = 'All';
+  
+    // Search Function
+    searchInput.addEventListener('input', function() {
+      filterEvents();
+    });
+  
+    // Filter Buttons Function
+    filterButtons.forEach(button => {
+      button.addEventListener('click', function() {
+        // Update active category
+        activeCategory = this.textContent.trim();
+  
+        // Update button styles
+        filterButtons.forEach(btn => {
+          btn.classList.remove('bg-blue-600', 'text-white');
+          btn.classList.add('bg-white', 'hover:bg-gray-100', 'text-black');
+        });
+        this.classList.add('bg-blue-600', 'text-white');
+        this.classList.remove('bg-white', 'hover:bg-gray-100', 'text-black');
+  
+        filterEvents();
+      });
+    });
+  
+    // Filtering logic
+    function filterEvents() {
+      const searchTerm = searchInput.value.toLowerCase();
+  
+      events.forEach(event => {
+        const title = event.querySelector('h2').textContent.toLowerCase();
+        const tags = Array.from(event.querySelectorAll('span')).map(tag => tag.textContent.toLowerCase());
+        
+        const matchesSearch = title.includes(searchTerm);
+        const matchesCategory = (activeCategory === 'All') || tags.some(tag => tag.includes(activeCategory.toLowerCase()));
+  
+        if (matchesSearch && matchesCategory) {
+          event.style.display = 'block';
+        } else {
+          event.style.display = 'none';
+        }
+      });
+    }
+  });
+    
+</script>
 {% endblock %}
