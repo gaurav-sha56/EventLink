@@ -17,6 +17,6 @@ urlpatterns = [
     path('profile', views.profile, name='profile'),
     path('find_teammates', views.find_teammates, name='find_teammates'),
     path('create_team', views.find_teammates, name='create_team'),
-    path('complete-profile/', views.complete_profile, name='complete_profile'),
+    path('complete-profile/', views.complete_profile, name='complete-profile'),
 
 ]
