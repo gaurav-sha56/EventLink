@@ -42,17 +42,6 @@
           <label class="block text-sm font-semibold mb-2">Profile Picture</label>
           {{ form.profile_picture }}
         </div>
-        <div>
-          <label class="block text-sm font-semibold mb-2">About Virtues</label>
-          <div class="flex flex-col gap-2">
-            {% for cb in form.virtues %}
-              <label class="flex items-center space-x-2">
-                {{ cb.tag }}
-                <span>{{ cb.choice_label }}</span>
-              </label>
-            {% endfor %}
-          </div>
-        </div>
       </div>
 
       <!-- Actions -->

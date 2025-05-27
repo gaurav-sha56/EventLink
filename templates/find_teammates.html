@@ -7,7 +7,9 @@
     <div class="bg-white p-4 rounded-xl shadow-md">
       <h2 class="text-xl font-semibold">{{ team.name }}</h2>
       <p class="text-gray-700">{{ team.description }}</p>
-      <p class="text-sm text-gray-500 mt-1">Leader: {{ team.leader.username }}</p>
+      <a href="{% url 'view_profile' team.leader.username %}" class="text-blue-600 hover:underline">
+          {{ team.leader.username }}
+        </a>
       <form action="{% url 'send_request' team.id %}" method="post">
         {% csrf_token %} 
         {% if team.leader != request.user %}

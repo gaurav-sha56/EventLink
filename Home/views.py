@@ -198,3 +198,7 @@ def reject_request(request, request_id):
     join_request.save()
     messages.info(request, f"Rejected {join_request.user.username}'s request.")
     return redirect('dashboard', team_id=join_request.team.id)
+
+def view_profile(request, username):
+    profile = get_object_or_404(Profile, user__username=username)
+    return render(request, 'view_profile.html', {'profile': profile})
