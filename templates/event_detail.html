@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<main class="container mx-auto px-6 py-8">
+    <h1 class="text-4xl font-bold text-center mb-10">Ignitia: A Cultural Fest Extravaganza!</h1>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
+        <div class="bg-white rounded-lg shadow-lg p-6 col-span-2">
+            <h2 class="text-2xl font-semibold mb-4">Event Details: Ignitia</h2>
+            <p class="text-gray-700 mb-4">
+                Ignitia is an annual cultural fest, a vibrant celebration of art, talent, and creativity! Get ready for a spectacular showcase of dance, music, drama, literary arts, and much more. It's an opportunity to connect, compete, and create unforgettable memories.
+            </p>
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <p><strong class="font-medium">Organizers:</strong> Cultural Committee, Tech University</p>
+                    <p><strong class="font-medium">Event Head:</strong> Dr. Ananya Sharma</p>
+                    <p><strong class="font-medium">Co-Founder:</strong> Mr. Rohan Kapoor</p>
+                </div>
+                <div>
+                    <p><strong class="font-medium">Date:</strong> October 26-28, 2025</p>
+                    <p><strong class="font-medium">Venue:</strong> University Grounds</p>
+                    <p><strong class="font-medium">Theme:</strong> Fusion of Traditions</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-lg p-6">
+            <h2 class="text-2xl font-semibold mb-4">About Ignitia</h2>
+            <p class="text-gray-700">
+                Ignitia aims to foster a spirit of camaraderie and healthy competition among participants. It's a platform for students from various colleges to display their skills, learn from each other, and experience the rich cultural tapestry of our nation.
+            </p>
+        </div>
+    </div>
+
+    
+    <div class="text-center mb-10">
+        {% if event %}
+        <a href="{% url 'register_team' event.id %}">
+        <button class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full text-xl shadow-lg transition duration-300 ease-in-out transform hover:scale-105">Register Your Team Now!</button>
+        </a>
+        {% else %}
+        <p>Event data not found.</p>
+        {% endif %}
+        {% if event %}
+        <a href="{% url 'find_teammates' event.id %}">
+        <button class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full text-xl shadow-lg transition duration-300 ease-in-out transform hover:scale-105">Find Teammates</button>
+        </a>
+        {% else %}
+        <p>Event data not found.</p>
+        {% endif %}
+
+    </div>
+
+    
+</main>
+{% endblock %}

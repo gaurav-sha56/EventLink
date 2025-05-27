@@ -24,15 +24,15 @@
         {% comment %}
           
         <li><a href="{% url 'events' %}" class="hover:text-blue-600">Events</a></li>{% endcomment %}
-        <li><a href="{% url 'teams' %}" class="hover:text-blue-600">Teams</a></li>
-        <li><a href="{% url 'teams' %}" class="hover:text-blue-600">About us</a></li>
+        <li><a href="{% url 'dashboard' %}" class="hover:text-blue-600">Dashboard</a></li>
+        <li><a href="{% url 'profile' %}" class="hover:text-blue-600">Profile</a></li>
       </ul>
     </nav>
 
     <!-- Auth Buttons -->
     <div class="space-x-2">
       {% if user.is_authenticated %}
-        <span class="text-sm"><a href={% url "dashboard" %} class="text-decoration-line: underline">Hello, {{ user.username }}</a></span>
+        <span class="text-sm"><a href={% url "profile" %} class="text-decoration-line: underline">Hello, {{ user.username }}</a></span>
         <a href="{% url 'logout' %}" class="px-4 py-1.5 border border-gray-400 rounded-md">Logout</a>
       {% else %}
         <a href="{% url 'student_login' %}" class="px-3 py-1.5 bg-blue-600 text-white rounded-md">Student Login</a>
