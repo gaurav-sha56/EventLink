@@ -26,6 +26,6 @@ urlpatterns = [
     path('events/<int:event_id>/register/find-teammates', views.find_teammates, name='find_teammates'),
     path('requests/<int:request_id>/accept/', views.accept_request, name='accept'),
     path('requests/<int:request_id>/reject/', views.reject_request, name='reject'),
-
+    path('profile/<str:username>/', views.view_profile, name='view_profile'),
 
 ]

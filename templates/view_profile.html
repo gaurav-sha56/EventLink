@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="max-w-3xl mx-auto bg-white shadow-md rounded-lg p-6 mt-6">
-  <h2 class="text-2xl font-semibold mb-4">Your Profile</h2>
+  <h2 class="text-2xl font-semibold mb-4">{{ profile.full_name|default:profile.user.username }}'s Profile</h2>
   
   <div class="flex items-center space-x-6 mb-6">
     {% if profile.profile_picture %}
@@ -20,15 +20,15 @@
     </div>
   </div>
 
-  <div>
+  {% comment %} <div>
     <h3 class="text-lg font-semibold mb-2">Virtues</h3>
     <ul class="list-disc list-inside text-gray-700">
-      {% comment %} {% for virtue in profile.virtues.all %}
+      {% for virtue in profile.virtues.all %}
         <li>{{ virtue.name }}</li>
       {% empty %}
         <li>No virtues selected.</li>
-      {% endfor %} {% endcomment %}
+      {% endfor %}
     </ul>
-  </div>
+  </div> {% endcomment %}
 </div>
 {% endblock %}
