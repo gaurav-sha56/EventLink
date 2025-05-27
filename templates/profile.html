@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="max-w-3xl mx-auto bg-white shadow-md rounded-lg p-6 mt-6">
+  <h2 class="text-2xl font-semibold mb-4">Your Profile</h2>
+  
+  <div class="flex items-center space-x-6 mb-6">
+    {% if profile.profile_picture %}
+      <img src="{{ profile.profile_picture.url }}" class="w-24 h-24 rounded-full object-cover" alt="Profile Picture">
+    {% else %}
+      <div class="w-24 h-24 rounded-full bg-gray-200 flex items-center justify-center text-gray-500">
+        No Image
+      </div>
+    {% endif %}
+    <div>
+      <p class="text-xl font-bold">{{ profile.full_name }}</p>
+      <p class="text-gray-600">Class: {{ profile.class_name }} - Section: {{ profile.section }}</p>
+      <p class="text-gray-600">Roll Number: {{ profile.net_number }}</p>
+      <p class="text-sm text-gray-500 mt-1">{{ profile.about_you }}</p>
+    </div>
+  </div>
+
+  <div>
+    <h3 class="text-lg font-semibold mb-2">Virtues</h3>
+    <ul class="list-disc list-inside text-gray-700">
+      {% for virtue in profile.virtues.all %}
+        <li>{{ virtue.name }}</li>
+      {% empty %}
+        <li>No virtues selected.</li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="max-w-6xl mx-auto p-6">
+  <h1 class="text-3xl font-bold mb-6">Dashboard</h1>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+    <!-- Upcoming Events -->
+    <div>
+      <h2 class="text-xl font-semibold mb-3">Teams</h2>
+      <div class="bg-white border rounded-lg p-4 space-y-4">
+        {% comment %} {% for team in teams %}
+          <div>
+            <p class="font-semibold">{{ team.name }}</p>
+            <p class="text-sm text-gray-600">{{ team.event_date }}</p>
+            <p class="text-sm text-gray-600">{{ team.location }}</p>
+          </div>
+        {% empty %}
+          <p class="text-sm text-gray-600">No upcoming events.</p>
+        {% endfor %} {% endcomment %}
+         YOUR TEAMS WILL SHOW HERE
+      </div>
+    </div>
+
+    <!-- Team Join Requests (for Team Leader) -->
+    <div>
+      <h2 class="text-xl font-semibold mb-3">Team Requests</h2>
+      <div class="bg-white border rounded-lg p-4 space-y-4">
+        {% for req in received_requests %}
+        <div class="flex justify-between items-center">
+          <div>
+            <p class="font-semibold">{{ req.sender.username }}</p>
+            <p class="text-sm text-gray-600">Requested to join: {{ req.team.name }}</p>
+          </div>
+          <div class="space-x-2">
+            <a href="{% url 'update_request' req.id 'accept' %}" class="px-3 py-1 text-sm bg-blue-100 text-blue-700 rounded">Accept</a>
+            <a href="{% url 'update_request' req.id 'reject' %}" class="px-3 py-1 text-sm bg-gray-100 text-gray-700 rounded">Decline</a>
+          </div>
+        </div>
+        {% empty %}
+        <p class="text-sm text-gray-600">No pending join requests.</p>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Your Activity (Sent Requests Summary) -->
+    <div>
+      <h2 class="text-xl font-semibold mt-6 mb-3">Your Activity</h2>
+      <div class="bg-white border rounded-lg p-4 space-y-4">
+        {% for req in sent_requests %}
+        <div class="flex justify-between items-center">
+          <div>
+            <p class="font-semibold">{{ req.team.name }}</p>
+            <p class="text-sm text-gray-600">Status: {{ req.get_status_display }}</p>
+          </div>
+          {% if req.status == 'pending' %}
+          <form method="post" action="{% url 'cancel_request' req.id %}">
+            {% csrf_token %}
+            <button type="submit" class="px-3 py-1 text-sm bg-red-100 text-red-700 rounded">Cancel</button>
+          </form>
+          {% endif %}
+        </div>
+        {% empty %}
+        <p class="text-sm text-gray-600">You haven't sent any join requests yet.</p>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Placeholder Column -->
+    <div>
+      <h2 class="text-xl font-semibold mt-6 mb-3 invisible md:visible">Summary</h2>
+      <div class="bg-white border rounded-lg p-4">
+        <p class="text-sm text-gray-500">All your request history and team activity will appear here soon.</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endblock %}

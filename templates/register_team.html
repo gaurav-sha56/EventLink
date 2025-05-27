@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% block content %}
+<div class="max-w-xl mx-auto mt-10 p-6 bg-white shadow rounded-xl">
+    <h1 class="text-2xl font-semibold mb-6">Register Team for "{{ event.name }}"</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-4">
+            <label class="block text-gray-700 font-medium">Team Name</label>
+            {{ form.name|add_class:"w-full px-4 py-2 border rounded mt-1" }}
+        </div>
+
+        <div class="mb-4">
+            <label class="block text-gray-700 font-medium">Description</label>
+            {{ form.description|add_class:"w-full px-4 py-2 border rounded mt-1" }}
+        </div>
+
+        <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded">
+            Create Team
+        </button>
+    </form>
+</div>
+{% endblock %}

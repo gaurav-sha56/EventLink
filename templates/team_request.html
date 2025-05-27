@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="p-6">
+  <h1 class="text-2xl font-bold mb-4">Join Requests</h1>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    {% for request in join_requests %}
+    <div class="bg-white p-4 rounded shadow">
+      <p><strong>User:</strong> {{ request.user.username }}</p>
+      <p><strong>Team:</strong> {{ request.team.name }}</p>
+      <div class="mt-2 flex gap-2">
+        <form method="post" action="{% url 'accept' request.id %}">
+          {% csrf_token %}
+          <button class="px-3 py-1 bg-green-500 text-white rounded">Accept</button>
+        </form>
+        <form method="post" action="{% url 'reject' request.id %}">
+          {% csrf_token %}
+          <button class="px-3 py-1 bg-red-500 text-white rounded">Reject</button>
+        </form>
+      </div>
+    </div>
+    {% empty %}
+    <p>No join requests available.</p>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

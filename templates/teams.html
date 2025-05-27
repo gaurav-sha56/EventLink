@@ -1,0 +1,162 @@
+{% comment %} {% extends "base.html" %}
+
+{% block content %}
+<h2 class="text-2xl font-bold mb-4">All Teams</h2>
+<ul>
+    {% for team in teams %}
+        <li class="mb-2 p-2 border rounded shadow">
+            <strong>{{ team.name }}</strong><br>
+            {{ team.description }}<br>
+            Leader: {{ team.leader.username }}
+            <a href="{% url 'send_request' team.id %}" class="text-blue-500 ml-4">Request to Join</a>
+        </li>
+    {% empty %}
+        <li>No teams available.</li>
+    {% endfor %}
+</ul>
+{% endblock %} {% endcomment %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>EventLink Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles for the progress bar */
+        .progress-bar-container {
+            width: 100%;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        .progress-bar {
+            height: 20px;
+            background-color: #4CAF50;
+            text-align: center;
+            color: white;
+            line-height: 20px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+    <nav class="bg-white shadow-sm px-6 py-4 flex justify-between items-center">
+        <div class="flex items-center space-x-2">
+            <span class="text-2xl font-bold">🔗 EVENTLINK</span>
+        </div>
+        <div class="flex space-x-6">
+            <a href="5.html" class="hover:text-blue-600">Home</a>
+            <a href="" class="hover:text-blue-600">Tasks</a>
+            <a href="teams.html" class="hover:text-blue-600">Teams</a>
+            <a href="my profile.html" class="hover:text-blue-600">My profile</a>
+        </div>
+        <div class="flex items-center space-x-4">
+            <span>Hello, mate</span>
+            <button class="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300">Logout</button>
+        </div>
+    </nav>
+    <main class="container mx-auto px-6 py-8">
+        <h1 class="text-4xl font-bold text-center mb-10">Ignitia: A Cultural Fest Extravaganza!</h1>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
+            <div class="bg-white rounded-lg shadow-lg p-6 col-span-2">
+                <h2 class="text-2xl font-semibold mb-4">Event Details: Ignitia</h2>
+                <p class="text-gray-700 mb-4">Ignitia is an annual cultural fest, a vibrant celebration of art, talent, and creativity! Get ready for a spectacular showcase of dance, music, drama, literary arts, and much more. It's an opportunity to connect, compete, and create unforgettable memories.</p>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <p><strong class="font-medium">Organizers:</strong> Cultural Committee, Tech University</p>
+                        <p><strong class="font-medium">Event Head:</strong> Dr. Ananya Sharma</p>
+                        <p><strong class="font-medium">Co-Founder:</strong> Mr. Rohan Kapoor</p>
+                    </div>
+                    <div>
+                        <p><strong class="font-medium">Date:</strong> October 26-28, 2025</p>
+                        <p><strong class="font-medium">Venue:</strong> University Grounds</p>
+                        <p><strong class="font-medium">Theme:</strong> Fusion of Traditions</p>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h2 class="text-2xl font-semibold mb-4">About Ignitia</h2>
+                <p class="text-gray-700">Ignitia aims to foster a spirit of camaraderie and healthy competition among participants. It's a platform for students from various colleges to display their skills, learn from each other, and experience the rich cultural tapestry of our nation. Expect dazzling performances, engaging workshops, and exciting competitions across various genres.</p>
+            </div>
+        </div>
+
+        <div class="bg-white p-4 shadow-md rounded-md flex flex-col md:flex-row gap-6 mb-10">
+            <div class="flex-1">
+                <h2 class="text-xl font-semibold mb-2">Ignitia Innovation Challenge</h2>
+                <p>This innovation challenge, part of Ignitia, is aimed at promoting problem-solving and creative thinking among college students. Teams from various colleges are invited to participate.</p>
+                <p>Each team must consist of *2-4 members. The event will be conducted over **48 hours*, and prizes will be awarded to the top teams.</p>
+            </div>
+            <div class="bg-gray-100 p-4 rounded-md shadow-md w-full md:w-1/2">
+                <h2 class="text-lg font-bold mb-4">Register Your Team for the Challenge</h2>
+                <form class="space-y-3">
+                    <input type="text" placeholder="Team Name" class="w-full p-2 border rounded" />
+                    <input type="text" placeholder="Member 1 Name" class="w-full p-2 border rounded" />
+                    <input type="text" placeholder="Member 2 Name" class="w-full p-2 border rounded" />
+                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Register</button>
+                </form>
+            </div>
+        </div>
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-10">
+            <h2 class="text-2xl font-semibold mb-4">Event Participation & Progress</h2>
+            <table class="min-w-full bg-white">
+                <thead>
+                    <tr>
+                        <th class="py-2 px-4 border-b text-left">Event Category</th>
+                        <th class="py-2 px-4 border-b text-left">Teams Entered</th>
+                        <th class="py-2 px-4 border-b text-left">Work Completed</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="py-2 px-4 border-b">IoT Event</td>
+                        <td class="py-2 px-4 border-b">15</td>
+                        <td class="py-2 px-4 border-b">
+                            <div class="progress-bar-container">
+                                <div class="progress-bar" style="width: 75%;">75%</div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="py-2 px-4 border-b">Core Event</td>
+                        <td class="py-2 px-4 border-b">22</td>
+                        <td class="py-2 px-4 border-b">
+                            <div class="progress-bar-container">
+                                <div class="progress-bar" style="width: 90%;">90%</div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="py-2 px-4 border-b">BSS Depend Event</td>
+                        <td class="py-2 px-4 border-b">18</td>
+                        <td class="py-2 px-4 border-b">
+                            <div class="progress-bar-container">
+                                <div class="progress-bar" style="width: 60%;">60%</div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="py-2 px-4 border-b">Dance Mania</td>
+                        <td class="py-2 px-4 border-b">30</td>
+                        <td class="py-2 px-4 border-b">
+                            <div class="progress-bar-container">
+                                <div class="progress-bar" style="width: 85%;">85%</div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="py-2 px-4 border-b">Battle of Bands</td>
+                        <td class="py-2 px-4 border-b">12</td>
+                        <td class="py-2 px-4 border-b">
+                            <div class="progress-bar-container">
+                                <div class="progress-bar" style="width: 50%;">50%</div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+</body>
+</html>
